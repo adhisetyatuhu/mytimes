@@ -1,4 +1,14 @@
+import { url } from "inspector";
 import Image from "next/image";
+
+interface News {
+  section: string;
+  title: string;
+  abstract: string;
+  url: string;
+  imageLarge: string;
+  imageSmall: string;
+}
 
 function Header() {
   return (
@@ -18,16 +28,16 @@ function Header() {
   );
 }
 
-function SmallNewsCard() {
+function SmallNewsCard({ news }: { news: News }) {
   return (
     <div>
-      <figure className="bg-gray-500 w-full h-32">
-        <img src="" alt="News Image" />
+      <figure className="bg-gray-500 w-full h-32 overflow-hidden">
+        <img src={news.imageSmall} alt="News Image" />
       </figure>
       <h3 className="font-sans text-sm uppercase font-semibold">
-        News Category
+        {news.section}
       </h3>
-      <h2 className="text-lg">The News Title</h2>
+      <h2 className="text-lg">{news.title}</h2>
     </div>
   );
 }
@@ -76,7 +86,29 @@ function Sidebar() {
   );
 }
 
-export default function Home() {
+const fetchNews = async () => {
+  const data = await fetch(
+    "https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=" +
+      process.env.NYTIMES_API_KEY
+  );
+  const dataJSON = await data.json();
+
+  let newsList: News[] = dataJSON.results.map((news: any) => {
+    return {
+      section: news.section,
+      title: news.title,
+      abstract: news.abstract,
+      url: news.url,
+      imageLarge: news.multimedia[0].url,
+      imageSmall: news.multimedia[1].url,
+    };
+  });
+
+  return newsList;
+};
+
+export default async function Home() {
+  const newsList = await fetchNews();
   return (
     <div className="container mx-auto">
       <Header />
@@ -84,9 +116,9 @@ export default function Home() {
         <div className="w-2/3 flex flex-col">
           <BigNewsCard />
           <div className="grid grid-cols-3 gap-4 mt-6">
-            <SmallNewsCard />
-            <SmallNewsCard />
-            <SmallNewsCard />
+            {newsList.map((news) => {
+              return <SmallNewsCard news={news} />;
+            })}
           </div>
         </div>
         <div className="w-1/3">
