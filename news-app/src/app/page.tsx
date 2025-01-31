@@ -42,46 +42,40 @@ function SmallNewsCard({ news }: { news: News }) {
   );
 }
 
-function BigNewsCard() {
+function BigNewsCard({ news }: { news: News }) {
   return (
     <div className="flex gap-4">
       <div className="w-1/3">
-        <h3>News Category</h3>
-        <h2>The News Title</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum vitae
-          nisi alias hic, nulla odio sit dignissimos delectus dicta corrupti
-          voluptatem libero? Ut laudantium aut tempore nulla sit eos alias.
-        </p>
+        <h3 className="font-sans uppercase text-sm">{news.section}</h3>
+        <h2 className="font-semibold">{news.title}</h2>
+        <p>{news.abstract}</p>
       </div>
       <figure className="bg-gray-400 w-2/3">
-        <img src="" alt="News Image" />
+        <img src={news.imageSmall} alt="News Image" />
       </figure>
     </div>
   );
 }
 
-function NewsList() {
+function NewsRow({ news }: { news: News }) {
   return (
-    <div>
+    <div className="my-2">
       <div className="text-red-600 uppercase font-sans text-xs font-semibold">
-        News Category
+        {news.section}
       </div>
-      <div className="text-lg">
-        The News Title ipsum dolor sit amet consectetur elit ipsum dolor sit
-      </div>
+      <div className="text-lg">{news.title}</div>
     </div>
   );
 }
 
-function Sidebar() {
+function Sidebar({ newsList }: { newsList: News[] }) {
   return (
     <div className="hidden md:flex flex-col px-4">
-      <NewsList />
-      <NewsList />
-      <NewsList />
-      <NewsList />
-      <NewsList />
+      <div className="font-semibold font-sans">The Latest</div>
+      <hr className="mb-4" />
+      {newsList.map((news) => {
+        return <NewsRow news={news} />;
+      })}
     </div>
   );
 }
@@ -109,12 +103,15 @@ const fetchNews = async () => {
 
 export default async function Home() {
   const newsList = await fetchNews();
+  const randomIndex = Math.floor(Math.random() * newsList.length);
+  const highlightedNews = newsList[randomIndex];
+
   return (
     <div className="container mx-auto">
       <Header />
       <div className="flex">
         <div className="w-2/3 flex flex-col">
-          <BigNewsCard />
+          <BigNewsCard news={highlightedNews} />
           <div className="grid grid-cols-3 gap-4 mt-6">
             {newsList.map((news) => {
               return <SmallNewsCard news={news} />;
@@ -122,7 +119,7 @@ export default async function Home() {
           </div>
         </div>
         <div className="w-1/3">
-          <Sidebar />
+          <Sidebar newsList={newsList} />
         </div>
       </div>
     </div>
