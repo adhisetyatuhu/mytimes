@@ -9,13 +9,9 @@ const fetchNews = async () => {
     const dataJSON = await data.json();
 
     let newsList: News[] = dataJSON.results.map((news: any) => {
-        const imageLarge = news.multimedia
-            ? news.multimedia[0].url
-            : "https://community.cyberpanel.net/uploads/default/optimized/2X/2/2a07bbf0921bf30b47e12503b5e3a402e57c28c1_2_1380x758.jpeg";
+        const imageLarge = news.multimedia ? news.multimedia[0].url : "";
         const imageSmall =
-            news.multimedia?.length > 1
-                ? news.multimedia[1].url
-                : "https://community.cyberpanel.net/uploads/default/optimized/2X/2/2a07bbf0921bf30b47e12503b5e3a402e57c28c1_2_1380x758.jpeg";
+            news.multimedia?.length > 1 ? news.multimedia[1].url : "";
         return {
             section: news.section,
             title: news.title,
