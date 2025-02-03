@@ -78,6 +78,7 @@ export default function Header() {
                                 type="checkbox"
                                 className="drawer-toggle"
                                 checked={isDrawerOpen}
+                                onChange={() => setIsDrawerOpen(isDrawerOpen)}
                             />
                             <div className="drawer-content">
                                 {/* Page content here */}
