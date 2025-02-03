@@ -33,9 +33,9 @@ export function BigNewsCard({ news }: { news: News }) {
         <a
             href={news.url}
             target="_blank"
-            className="flex gap-4 hover:cursor-pointer group"
+            className="flex flex-wrap-reverse sm:flex-nowrap gap-4 hover:cursor-pointer group"
         >
-            <div className="w-1/3 flex flex-col gap-3">
+            <div className="sm:w-1/3 flex flex-col gap-3">
                 <h3 className="font-sans uppercase text-sm my-2 text-red-800 group-hover:text-red-600 group-hover:font-semibold">
                     {news.section}
                 </h3>
@@ -44,10 +44,10 @@ export function BigNewsCard({ news }: { news: News }) {
                 </h2>
                 <p className="text-lg">{news.abstract}</p>
             </div>
-            <figure className="bg-gray-500 w-2/3 relative overflow-hidden">
+            <figure className="bg-gray-500 sm:w-2/3 sm:relative overflow-hidden md:min-h-60">
                 {news.imageSmall ? (
                     <img
-                        className="absolute -left-full -right-full m-auto group-hover:opacity-80"
+                        className="sm:absolute -left-full -right-full m-auto group-hover:opacity-80"
                         src={news.imageSmall}
                         alt="News Image"
                     />

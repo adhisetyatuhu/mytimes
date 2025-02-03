@@ -32,12 +32,12 @@ export default async function Home() {
 
     return (
         <>
-            <div className="container mx-auto">
+            <div className="sm:container mx-auto px-4 sm:p-0">
                 <div className="flex gap-6">
                     <div className="lg:w-2/3 flex flex-col gap-4">
                         <BigNewsCard news={highlightedNews} />
                         <hr className="my-4" />
-                        <div className="grid grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4">
                             {newsList.splice(0, 6).map((news) => {
                                 return <SmallNewsCard news={news} />;
                             })}

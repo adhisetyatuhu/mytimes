@@ -28,9 +28,9 @@ async function SectionPage({ params }: { params: { section: string } }) {
     const newsLatest = await fetchNews("home");
 
     return (
-        <div className="container mx-auto">
+        <div className="container mx-auto px-4 sm:p-0">
             <div className="flex gap-8">
-                <div className="lg:w-2/3 grid grid-cols-3 gap-4">
+                <div className="lg:w-2/3 grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {newsList.splice(0, 12).map((news) => {
                         return <SmallNewsCard news={news} />;
                     })}
