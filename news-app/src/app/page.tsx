@@ -8,7 +8,7 @@ const fetchNews = async () => {
     );
     const dataJSON = await data.json();
 
-    let newsList: News[] = dataJSON.results.map((news: any) => {
+    const newsList: News[] = dataJSON.results.map((news: any) => {
         const imageLarge = news.multimedia ? news.multimedia[0].url : "";
         const imageSmall =
             news.multimedia?.length > 1 ? news.multimedia[1].url : "";
@@ -38,8 +38,10 @@ export default async function Home() {
                         <BigNewsCard news={highlightedNews} />
                         <hr className="my-4" />
                         <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4">
-                            {newsList.splice(0, 6).map((news) => {
-                                return <SmallNewsCard news={news} />;
+                            {newsList.splice(0, 6).map((news, index) => {
+                                return (
+                                    <SmallNewsCard key={index} news={news} />
+                                );
                             })}
                         </div>
                     </div>

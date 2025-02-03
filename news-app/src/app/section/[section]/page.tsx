@@ -7,7 +7,7 @@ const fetchNews = async (section: string) => {
     );
     const dataJSON = await data.json();
 
-    let newsList: News[] = dataJSON.results.map((news: any) => {
+    const newsList: News[] = dataJSON.results.map((news: any) => {
         const imageLarge = news.multimedia ? news.multimedia[0].url : "";
         const imageSmall =
             news.multimedia?.length > 1 ? news.multimedia[1].url : "";
@@ -31,8 +31,8 @@ async function SectionPage({ params }: { params: { section: string } }) {
         <div className="container mx-auto px-4 sm:p-0">
             <div className="flex gap-8">
                 <div className="lg:w-2/3 grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    {newsList.splice(0, 12).map((news) => {
-                        return <SmallNewsCard news={news} />;
+                    {newsList.splice(0, 12).map((news, index) => {
+                        return <SmallNewsCard key={index} news={news} />;
                     })}
                 </div>
 
