@@ -105,11 +105,14 @@ export default function Header() {
                                     aria-label="close sidebar"
                                     className="drawer-overlay"
                                 ></label>
-                                <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 font-sans">
-                                    <li className="font-semibold active:bg-black/0">
+                                <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 text-lg">
+                                    <li className="font-extrabold text-xl uppercase active:bg-black/0">
                                         <div className="flex justify-between px-2">
                                             <label className="active:bg-black/0">
-                                                Sections
+                                                <span className="text-red-800">
+                                                    MY
+                                                </span>
+                                                TIMES
                                             </label>
                                             <div onClick={toggle}>
                                                 <svg
