@@ -15,7 +15,7 @@ function SidebarRow({ news }: { news: News }) {
 
 export default function Sidebar({ newsList }: { newsList: News[] }) {
     return (
-        <div className="hidden md:flex flex-col px-4">
+        <div className="flex flex-col">
             <div className="font-semibold font-sans text-lg">The Latest</div>
             <hr className="mb-2" />
             {newsList.map((news, index) => {

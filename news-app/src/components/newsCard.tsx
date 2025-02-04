@@ -5,7 +5,7 @@ export function SmallNewsCard({ news }: { news: News }) {
             target="_blank"
             className="hover:cursor-pointer mb-8 group"
         >
-            <figure className="bg-gray-500 w-full h-32 overflow-hidden mb-4">
+            <figure className="bg-gray-500 w-full min-h-24 overflow-hidden mb-4">
                 {news.imageSmall ? (
                     <img
                         className="group-hover:opacity-70"
@@ -44,7 +44,11 @@ export function BigNewsCard({ news }: { news: News }) {
                 </h2>
                 <p className="text-lg">{news.abstract}</p>
             </div>
-            <figure className="bg-gray-500 sm:w-2/3 sm:relative overflow-hidden md:min-h-60">
+            <figure
+                className={`${
+                    !news.imageSmall && "bg-gray-500"
+                } sm:w-2/3 sm:relative overflow-hidden md:min-h-60`}
+            >
                 {news.imageSmall ? (
                     <img
                         className="sm:absolute -left-full -right-full m-auto group-hover:opacity-80"

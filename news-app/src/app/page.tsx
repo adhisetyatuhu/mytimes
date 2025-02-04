@@ -33,7 +33,7 @@ export default async function Home() {
     return (
         <>
             <div className="sm:container mx-auto px-4 sm:p-0">
-                <div className="flex gap-6">
+                <div className="flex max-sm:flex-wrap gap-10">
                     <div className="lg:w-2/3 flex flex-col gap-4">
                         <BigNewsCard news={highlightedNews} />
                         <hr className="my-4" />
@@ -45,7 +45,7 @@ export default async function Home() {
                             })}
                         </div>
                     </div>
-                    <div className="hidden lg:block lg:w-1/3">
+                    <div className="sm:hidden lg:block lg:w-1/3">
                         <Sidebar newsList={newsList.splice(6, 10)} />
                     </div>
                 </div>
