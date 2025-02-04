@@ -5,6 +5,11 @@ const fetchNews = async (section: string) => {
     const data = await fetch(
         `https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=${process.env.NYTIMES_API_KEY}`
     );
+
+    if (!data.ok) {
+        throw new Error("Failed fetching data...");
+    }
+
     const dataJSON = await data.json();
 
     const newsList: News[] = dataJSON.results.map((news: any) => {

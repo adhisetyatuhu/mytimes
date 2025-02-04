@@ -6,6 +6,11 @@ const fetchNews = async () => {
         "https://api.nytimes.com/svc/topstories/v2/home.json?api-key=" +
             process.env.NYTIMES_API_KEY
     );
+
+    if (!data.ok) {
+        throw new Error();
+    }
+
     const dataJSON = await data.json();
 
     const newsList: News[] = dataJSON.results.map((news: any) => {
