@@ -1,1 +1,2 @@
-# FERN-P3-S1GC01
+# MYTIMES
+A web based app that fetches and displays articles from NYTimes API.
